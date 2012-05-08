@@ -33,7 +33,7 @@ def doLogin(request):
                     msg = "Account is not active"
             else:
                 msg = "Username and/or Password is wrong"
-            return render_to_response(template,{},context_instance = RequestContext(request))
+            return render_to_response(template,{'msg':msg},context_instance = RequestContext(request))
     else :
         form = LoginForm()
     data = {
