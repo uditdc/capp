@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} <title> CAPP | Register </title>{% endblock %}
+
+{% block main_title %} Register {% endblock %}
+{% block main_content %}
+<form action="{% url register %}" method="POST">
+	{% csrf_token %}
+	{% if form.non_field_errors %}
+	<div class="form_errors">
+	  {% for err in form.non_field_errors %}
+	  <div class="form_error_message">{{ err }}</div>
+	  {% endfor %}
+	</div>	
+	{% endif %}
+	{% for hidden in form.hidden_fields %}
+	   {{ hidden }}
+	{% endfor %}
+	{% for field in form.visible_fields %}
+	  <div class="form_input_field">
+	    {{ field.label_tag }}
+	    {{ field }}
+	    {% for err in field.errors %}
+	    <span class="error_message">{{ err }}</span>
+	    {% endfor %}
+	  </div>
+	{% endfor %}
+	<input type="submit" value="Register"/>
+	<input type="reset" value="Reset"/>
+</form>
+
+{% endblock %}

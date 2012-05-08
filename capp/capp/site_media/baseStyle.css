@@ -1,0 +1,40 @@
+body{
+	padding : 0;
+	margin : 0;
+}
+label{
+	display : block;
+}
+header{
+	height : 55px;
+	margin-bottom: 30px;
+	border-bottom : 2px solid #333;
+}
+#logo{
+	display : inline-block;
+	height : 50px;
+	margin : 5px;
+}
+
+header .heading{
+	display: inline-block;
+	vertical-align : top;
+	line-height : 2;
+	font-family: Cambria, Georgia, serif;
+	font-size : 30px;
+	padding-left : 20px;
+	color : #555;
+	margin : auto;
+}
+
+#main_content{
+	margin : 20px;
+}
+.error_message{
+	margin-left : 20px;
+	color: red;
+	font-weight: bold;
+}
+.form_input_field{
+	
+}

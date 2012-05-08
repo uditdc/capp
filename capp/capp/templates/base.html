@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		{% block title %} <title>CAPP | Home</title> {% endblock %}
+		
+		<link href="{{MEDIA_URL}}baseStyle.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="{{MEDIA_URL}}jquery.js"></script>
+		{% block extra_js %} {% endblock %}
+	</head>
+	
+	<body>
+		<header>
+			<div id='logo'>
+				<img src="{{MEDIA_URL}}uoblogo.png">
+			</div>
+			<span class="heading"> {% block header_title %} UOB Annual Conference {% endblock %}</span>
+
+		</header>
+		<section id="main_content">
+			<h1>{% block main_title %} {% endblock %}</h1>
+			{% block main_content%} {%endblock%}
+		</section>		
+	</body>
+</html>
