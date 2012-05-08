@@ -28,7 +28,6 @@ class RegistrationForm(forms.Form):
                                widget=forms.TextInput(attrs = {"autocomplete ": "off"}))
     
     password = forms.CharField(widget=forms.PasswordInput())
-    
     confirm_password = forms.CharField(widget=forms.PasswordInput())
     fname = forms.CharField(max_length = 30)
     sname = forms.CharField(max_length = 30)

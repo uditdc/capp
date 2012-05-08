@@ -15,7 +15,10 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     
     url(r'^site_media/(?P<path>.*)$','django.views.static.serve',{'document_root' : settings.MEDIA_ROOT}),
+#    url(r'', '')
     url(r'^register/$', 'register.views.register', name='register'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^login/$', 'login.views.doLogin', name='login'),
+    url(r'^logout/$', 'login.views.doLogout', name='logout'),
     url(r'', include('django.contrib.flatpages.urls')),
 )

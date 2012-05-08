@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} <title> CAPP | Login </title>{% endblock %}
+
+{% block main_title %} Login {% endblock %}
+{% block main_content %}
+
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+    <a href="{% url logout %}"> Logout </a>
+{% else %}
+	<form action="{% url login %}" method="POST">
+		{% csrf_token %}
+		
+		{{form.as_p}}
+		
+		<input type="submit" value="Login"/>
+		<input type="reset" value="Reset"/>
+	</form>
+{% endif %}
+
+{% endblock %}
