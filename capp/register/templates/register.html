@@ -6,6 +6,7 @@
 {% block main_content %}
 <form action="{% url register %}" method="POST">
 	{% csrf_token %}
+	
 	{% if form.non_field_errors %}
 	<div class="form_errors">
 	  {% for err in form.non_field_errors %}
