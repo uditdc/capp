@@ -5,6 +5,62 @@
 		
 		<link href="{{MEDIA_URL}}baseStyle.css" rel="stylesheet" type="text/css">
 		<script type="text/javascript" src="{{MEDIA_URL}}jquery.js"></script>
+		{% block csrf_js %}
+			<script>
+				$(document).ready(function(){
+					$.ajaxSetup({
+					     beforeSend: function(xhr, settings) {
+					         function getCookie(name) {
+					             var cookieValue = null;
+					             if (document.cookie && document.cookie != '') {
+					                 var cookies = document.cookie.split(';');
+					                 for (var i = 0; i < cookies.length; i++) {
+					                     var cookie = jQuery.trim(cookies[i]);
+					                     // Does this cookie string begin with the name we want?
+					                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
+					                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					                     break;
+					                 }
+					             }
+					         }
+					         return cookieValue;
+					         }
+					         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+					             // Only send the token to relative URLs i.e. locally.
+					             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+					         }
+					     } 
+					});
+				});
+			</script>
+		{% endblock %}
+		
+		<script>
+			$(document).ready(function(){
+				$("#login_form").submit(function(e){
+					e.preventDefault();
+					var username = $("#login_form").find("input[name=username]").val();
+					var password = $("#login_form").find("input[name=password]").val();
+					var form = $(this);
+					
+					// $.ajax({
+						// data : $(form).serialize(),
+						// type : $(form).attr('method'),
+						// url : $(form).attr('action'),
+						// sucess : function(response){
+							// alert('hi');
+							// alert(response);
+						// }
+					// });
+					
+					
+					$.post('login/', {'username' : username, 'password' : password},function(result){
+						alert(result);
+					})
+				});
+			});
+		</script>
+		
 		{% block extra_js %} {% endblock %}
 	</head>
 	
@@ -14,7 +70,21 @@
 				<img src="{{MEDIA_URL}}uoblogo.png">
 			</div>
 			<span class="heading"> {% block header_title %} UOB Annual Conference {% endblock %}</span>
-
+			
+			<div id='login_panel'>
+				{% if user.is_authenticated %}
+				    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+				    <a href="{% url logout %}"> Logout </a>
+				{% else %}
+					<form id="login_form" action="{% url login %}" method="POST">
+						{% csrf_token %}
+						<input name="username" type="text" placeholder="Username" > <br>
+						<input name="password" type="password" placeholder="Password" >
+						<input type="submit" value="Login" id="login"/>
+					</form>
+				{% endif %}
+			</div>
+			
 		</header>
 		<section id="main_content">
 			<h1>{% block main_title %} {% endblock %}</h1>

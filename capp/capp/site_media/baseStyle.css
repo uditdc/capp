@@ -27,6 +27,16 @@ header .heading{
 	margin : auto;
 }
 
+#login_panel{
+	height : 50px;
+	position : absolute;
+	right : 5px;
+	display: inline-block;
+	padding-left: 10px;
+	border-left : 1px solid #555;
+	
+}
+
 #main_content{
 	margin : 20px;
 }

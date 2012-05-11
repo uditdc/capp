@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response, render
 from django.template.context import RequestContext
 from django.http import HttpResponse
 from models import LoginForm
+
 #def doLogin(request):
 #    msg = "Please Log in ..."
 #    if request.POST:
@@ -17,10 +18,11 @@ from models import LoginForm
 #        else:
 #            msg = "Username and/or Password is wrong"
 #    return HttpResponse(msg)
-        
+
+
 def doLogin(request):
+    print 'reached here'
     template = 'login.html'
-    
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -29,13 +31,13 @@ def doLogin(request):
                 if user.is_active :
                     login(request,user)
                     msg = "Logged in Sucessfully"
+                    return render_to_response('index.html',{},context_instance = RequestContext(request))
                 else:
                     msg = "Account is not active"
             else:
                 msg = "Username and/or Password is wrong"
-            return render_to_response(template,{'msg':msg},context_instance = RequestContext(request))
-    else :
-        form = LoginForm()
+
+    form = LoginForm()
     data = {
         'form' : form
     }
@@ -44,4 +46,4 @@ def doLogin(request):
 
 def doLogout(request):
     logout(request)
-    return render(request,'index.html',{},context_instance = RequestContext(request))
+    #return render(request,'index.html',{},context_instance = RequestContext(request))
